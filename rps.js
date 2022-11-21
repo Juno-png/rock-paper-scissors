@@ -1,43 +1,73 @@
-let playerSelection = getPlayerChoice();
-let computerSelection = getComputerChoice();
+let playerScore = 0;
+let computerScore = 0;
+let draws = 0;
 
-
-// get computer to randomly pick rock(0), paper(1), or scissors(2)
-function getComputerChoice () {
-   let randomNumber = Math.floor(Math.random() * 3)
-    // make computer print the outcome of its choice
-   switch (randomNumber) {
-       case 0:
-            return 'rock'
-        case 1:
-            return 'paper'
-        case 2: 
-            return 'scissors'
-    }
+//Computer choice
+function getComputerChoice() {
+  let random = Math.floor(Math.random() * 3);
+  switch (random) {
+    case 0:
+        return 'rock'
+    case 1:
+        return 'paper'
+    case 2:
+        return 'scissors'
+  }
 }
 
-console.log('NPC chose: ', computerSelection);
-
-function getPlayerChoice () {
-    let playerchoice = prompt('Choose your weapon')
-    return playerchoice.toLowerCase()
-}
-
-console.log('player chose: ', playerSelection);
-
-// play one round and declare winner or tie
+//Plays one round of RPS
 function playRound(playerSelection, computerSelection) {
-
-    if ((playerSelection == 'rock' && computerSelection == 'scissors') ||
-        (playerSelection == 'scissors' && computerSelection == 'paper') ||
-        (playerSelection == 'paper' && computerSelection == 'rock')) {
-
-        return 'You win! ' + playerSelection + ' beats ' + computerSelection
-    } else if (playerSelection === computerSelection) {
-        return 'tie'
-    } else {
-        return 'You lost! ' + computerSelection + ' beats ' + playerSelection
-    }
+  if (playerSelection === computerSelection) {
+    return draw;
+  } else if ((playerSelection === "rock" && computerSelection === "scissors") ||
+            (playerSelection === "paper" && computerSelection === "rock") ||
+            (playerSelection === "scissors" && computerSelection === "paper")) {
+        return playerWinRound;
+  } else {
+    return computerWinRound;
+  }
 }
 
-console.log(playRound(playerSelection, computerSelection));
+//Specifies round win/game win messages
+let playerWinRound = "Player wins this round!"
+let computerWinRound = "Computer wins this round!"
+let draw = "Draw!"
+let playerWin = "Player wins best of 5! Congratulations!"
+let computerWin = "Computer wins best of 5! Congratulations!"
+
+
+//For loop that plays multiple rounds
+for (let i = 0; i < 1000; i++) {
+  let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
+  const computerSelection = getComputerChoice();
+  let roundResult = playRound(playerSelection, computerSelection);
+  console.log(roundResult);
+  gameScore(roundResult);
+  console.log("Your score is " + playerScore);
+  console.log("The computer's score is " + computerScore);
+
+  if (playerScore === 3 || computerScore === 3) {
+    break;
+  }
+}
+
+
+//Keeps score and prints out correct messages based on score
+function gameScore(result) {
+
+  if (result === playerWinRound) {
+    playerScore++;
+  } else if (result === draw) {
+    draws++;
+  } else {
+    computerScore++;
+  }
+
+
+  if (playerScore == 3) {
+    console.log(playerWin);
+    return;
+  } else if (computerScore == 3) {
+    console.log(computerWin);
+  }
+}
