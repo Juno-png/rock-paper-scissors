@@ -1,73 +1,83 @@
-let playerScore = 0;
-let computerScore = 0;
-let draws = 0;
+let playerScore = 0
+let npcScore = 0
+let draws = 0
+// function that randomly returns computer choice
 
-//Computer choice
-function getComputerChoice() {
-  let random = Math.floor(Math.random() * 3);
-  switch (random) {
-    case 0:
-        return 'rock'
-    case 1:
-        return 'paper'
-    case 2:
-        return 'scissors'
-  }
+function getComputerChoice () {
+    let random = Math.floor(Math.random() * 3);
+    switch (random) {
+        case 0:
+            return 'rock'
+        case 1:
+            return 'paper'
+        case 2:
+            return 'scissors'
+    }
+   
 }
 
-//Plays one round of RPS
+
+// function that plays one round of rps, two parameters player choice, and computer choice
+
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection === computerSelection) {
-    return draw;
-  } else if ((playerSelection === "rock" && computerSelection === "scissors") ||
-            (playerSelection === "paper" && computerSelection === "rock") ||
-            (playerSelection === "scissors" && computerSelection === "paper")) {
-        return playerWinRound;
-  } else {
-    return computerWinRound;
-  }
+    if (playerSelection === 'rock' && computerSelection === 'scissors') {
+        return playerWin + 'rock beats scissors'
+    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+        return playerWin + 'paper beats rock'
+    } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+        return playerWin + 'scissors beats paper'
+    } else if (computerSelection === 'rock' && playerSelection === 'scissors') {
+        return npcWin + 'rock beats scissors'
+    } else if (computerSelection === 'paper' && playerSelection === 'rock') {
+        return npcWin + 'paper beats rock'
+    } else if (computerSelection === 'scissors' && playerSelection === 'paper') {
+        return npcWin + 'scissors beats paper'
+    } else {
+        return draw
+    }     
 }
 
-//Specifies round win/game win messages
-let playerWinRound = "Player wins this round!"
-let computerWinRound = "Computer wins this round!"
-let draw = "Draw!"
-let playerWin = "Player wins best of 5! Congratulations!"
-let computerWin = "Computer wins best of 5! Congratulations!"
+let draw = 'Draw! no points!'
+let playerWin = 'You win!'
+let npcWin = 'You lose!'
 
+// function that calls playRound to play a 5 round game that keeps score and outputs outcome
 
-//For loop that plays multiple rounds
-for (let i = 0; i < 1000; i++) {
-  let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
-  const computerSelection = getComputerChoice();
-  let roundResult = playRound(playerSelection, computerSelection);
-  console.log(roundResult);
-  gameScore(roundResult);
-  console.log("Your score is " + playerScore);
-  console.log("The computer's score is " + computerScore);
-
-  if (playerScore === 3 || computerScore === 3) {
-    break;
-  }
+for (let i = 0; i < 5; i++) {
+    let playerSelection = window.prompt('rock,paper, or scissors?').toLowerCase();
+    const computerSelection = getComputerChoice();
+    let roundResult = playRound(playerSelection, computerSelection);
+    console.log(playerSelection);
+    console.log(computerSelection);
+    console.log(roundResult);
+    game(roundResult);
+    console.log('Your score is ' + playerScore);
+    console.log('Npc score is ' + npcScore);
 }
 
+function game (result) {
+    if ((result === playerWin + 'rock beats scissors') ||
+        (result === playerWin + 'paper beats rock') ||
+        (result === playerWin + 'scissors beats paper')) {
+        playerScore++;
+    } else if  ((result === npcWin + 'rock beats scissors') || 
+                (result === npcWin + 'paper beats rock') || 
+                (result === npcWin + 'scissors beats paper')) {
+            npcScore++;
+    } else {
+        draws++;
+    }    
+}
 
-//Keeps score and prints out correct messages based on score
-function gameScore(result) {
+console.log(gameover());
 
-  if (result === playerWinRound) {
-    playerScore++;
-  } else if (result === draw) {
-    draws++;
-  } else {
-    computerScore++;
-  }
-
-
-  if (playerScore == 3) {
-    console.log(playerWin);
-    return;
-  } else if (computerScore == 3) {
-    console.log(computerWin);
-  }
+function gameover() {
+    if (playerScore === npcScore) {
+    console.log('Draw! No winner');
+    } else if (npcScore > playerScore) {
+    console.log('NPC WINS! you suck (<.<)');
+    } else {
+    console.log('PLAYER WINS! (^.^)');
+    }
+    return 'GAMEOVER THANKS FOR PLAYING!'
 }
