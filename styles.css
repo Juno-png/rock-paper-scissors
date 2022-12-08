@@ -1,0 +1,14 @@
+img {
+    height: auto;
+    width: 300px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#paper {
+    height: 170px;
+}
+
+img.paper {
+    height: 170px;
+}

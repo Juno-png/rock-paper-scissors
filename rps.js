@@ -1,8 +1,21 @@
 let playerScore = 0
 let npcScore = 0
 let draws = 0
-// function that randomly returns computer choice
 
+function resetGame() {
+    //reset game
+}
+
+function startGame() {
+// play the game until someone wins 5 times
+    playRound();
+
+    setWins();
+}
+
+
+// function that randomly returns computer choice
+// TODO update the DOM with computerSelection
 function getComputerChoice () {
     let random = Math.floor(Math.random() * 3);
     switch (random) {
@@ -43,19 +56,15 @@ let npcWin = 'You lose!'
 
 // function that calls playRound to play a 5 round game that keeps score and outputs outcome
 
-for (let i = 0; i < 5; i++) {
-    let playerSelection = window.prompt('rock,paper, or scissors?').toLowerCase();
+//for (let i = 0; i < 5; i++) {
+    //let playerSelection = window.prompt('rock,paper, or scissors?').toLowerCase();
+
     const computerSelection = getComputerChoice();
     let roundResult = playRound(playerSelection, computerSelection);
-    console.log(playerSelection);
-    console.log(computerSelection);
-    console.log(roundResult);
     game(roundResult);
-    console.log('Your score is ' + playerScore);
-    console.log('Npc score is ' + npcScore);
-}
+//}
 
-function game (result) {
+function checkWinner (result) {
     if ((result === playerWin + 'rock beats scissors') ||
         (result === playerWin + 'paper beats rock') ||
         (result === playerWin + 'scissors beats paper')) {
@@ -69,15 +78,15 @@ function game (result) {
     }    
 }
 
-console.log(gameover());
+(gameover());
 
 function gameover() {
     if (playerScore === npcScore) {
-    console.log('Draw! No winner');
+    ('Draw! No winner');
     } else if (npcScore > playerScore) {
-    console.log('NPC WINS! you suck (<.<)');
+    ('NPC WINS! you suck (<.<)');
     } else {
-    console.log('PLAYER WINS! (^.^)');
+    ('PLAYER WINS! (^.^)');
     }
     return 'GAMEOVER THANKS FOR PLAYING!'
 }
