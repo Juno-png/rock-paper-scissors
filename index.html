@@ -8,39 +8,15 @@
     <title>Rock Paper Scissors!</title>
 </head>
 <body>
-    <h1>Janken</h1>
-
-    <div class="score">
-        <h2 class="ties">Ties: 0</h2>
-    </div>
-    <div class="winDiv">
-        <h2 class="winner"></h2>
-        <button class="reset" onclick="resetGame()">Play Again?</button>
-    </div>
-    <div class="playerDiv">
-        <h3 class="playerChoice"></h3>
-        <h3 class="playerScore">Score: 0</h3>
-        <div class="playerImgs">
-           <img src="./images/Rock.png" alt="rock" class="playerImg" id="rock">
-           <img src="./images/Paper.png" alt="paper" class="playerImg" id="paper"> 
-           <img src="./images/Scissors.png" alt="scissors" class="playerImg" id="scissors">  
-        </div>
-    </div>
-    <div class="computerDiv">
-        <h3 class="computerChoice"></h3>
-        <h3 class="computerScore">Score: 0</h3>
-        <div class="computerImgs">
-           <img src="./images/Rock.png" alt="rock" class="rock">
-           <img src="./images/Paper.png" alt="paper" class="paper"> 
-           <img src="./images/Scissors.png" alt="scissors" class="scissors">  
-        </div>
-    </div>
-
+    <h1>JAN-KEN-PON!</h1>
     <p> Get ready to play!</p>
 
-    
-   
-    
+    <div class="buttons">
+        <button class="button" id="rock"><img src="./images/Rock.png"></button>
+        <button class="button" id="paper"><img src="./images/Paper.png"></button>
+        <button class="button" id="scissors"><img src="./images/Scissors.png"></button>
+    </div>
+    <div class="results" id="result"></div>
 
     <script src="rps.js"></script>
     
